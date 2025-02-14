@@ -120,9 +120,9 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     void SetVelocity(){
-        var velocity = rigidbody.velocity;
+        var velocity = rigidbody.linearVelocity;
         velocity = new Vector2(playerInputs.MoveInput * moveSpeed, velocity.y);
-        rigidbody.velocity = velocity;
+        rigidbody.linearVelocity = velocity;
     }
     
     void DashRight(){
@@ -137,12 +137,12 @@ public class PlayerMovement : MonoBehaviour{
      //add dash sound
         float t = Mathf.InverseLerp(this.dashStart, this.dashStart + dashDuration, Time.time); // time between 0 and 1
         dashStrength = animationCurve.Evaluate(t);
-        rigidbody.velocity = dashDirection * dashStrength * dashSpeed;
+        rigidbody.linearVelocity = dashDirection * dashStrength * dashSpeed;
     }
 
     void playFootstepSound(){
         playerAnimationSwitcher.SetAnimatorDisabled();
-        if (rigidbody.velocity.x > 0.12 && groundChecker.IsGrounded|| rigidbody.velocity.x < -0.12 && groundChecker.IsGrounded){
+        if (rigidbody.linearVelocity.x > 0.12 && groundChecker.IsGrounded|| rigidbody.linearVelocity.x < -0.12 && groundChecker.IsGrounded){
             playerAnimationSwitcher.SetAnimatorEnabled();
             _footstepInstance.getPlaybackState(out var playbackState);
             if (playbackState == PLAYBACK_STATE.STOPPED){

@@ -67,7 +67,7 @@ public class Trap : MonoBehaviour{
 
     IEnumerator ProhibitMovement(){
         player.GetComponent<PlayerMovement>().enabled = false;
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        player.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0,0);
         yield return new WaitForSeconds(movementDelay);
         player.GetComponent<PlayerMovement>().enabled = true;
     }
